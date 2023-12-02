@@ -1,0 +1,38 @@
+<div class="main rooms-new">
+  <div class="container">
+    <div class="form-heading">
+      <h2>施設検索</h2>
+      <h3>（１）キーワード検索</h3>
+    </div>
+    <div class="form rooms-form">
+      <div class="form-body">
+        <%= search_form_for @q, url: rooms_search_path do |room| %>
+          <table>
+            <tr>
+              <th><%= room.label :name_or_detail_cont, "キーワード" %></th>
+              <td><%= room.search_field :name_or_detail_cont, placeholder: "キーワードで検索" %></td>
+            </tr>
+          </table>
+          <div class="form-btns">
+            <p>
+              <%= room.submit "検索", class:"btn commit"%>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="form-heading">
+      <h3>（２）エリア検索</h3>
+    </div>
+    <div class="form rooms-form">
+      <div class="form-body">
+        <div class="area-search-wapper">
+          <%= link_to "東京", rooms_search_path(q:{address_cont:"東京"}), class: "btn tokyo" %>
+          <%= link_to "大阪", rooms_search_path(q:{address_cont:"大阪"}), class: "btn osaka"  %>
+          <%= link_to "京都", rooms_search_path(q:{address_cont:"京都"}), class: "btn kyoto"  %>
+          <%= link_to "札幌", rooms_search_path(q:{address_cont:"札幌"}), class: "btn sapporo"  %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

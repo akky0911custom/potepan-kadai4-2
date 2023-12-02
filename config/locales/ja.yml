@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      room: 施設
+    attributes:
+      room:
+        name: 施設名
+        image: 施設画像
+        address: 住所
+        detail: 施設詳細
+        charge: 料金

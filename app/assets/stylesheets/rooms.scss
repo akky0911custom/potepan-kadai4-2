@@ -1,0 +1,38 @@
+.rooms-index-item {
+  padding: 20px 30px;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 2px 6px #c1ced7;
+}
+
+.rooms-show-item {
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 2px 6px #c1ced7;
+  overflow: hidden;
+}
+
+.area-search-wapper {
+  display: flex;
+  justify-content:space-around;
+}
+
+.tokyo {
+  background-color: green;
+  color: white;
+}
+
+.osaka {
+  background-color: orangered;
+  color: white;
+}
+
+.kyoto {
+  background-color: purple;
+  color: white;
+}
+
+.sapporo {
+  background-color: red;
+  color: white;
+}

@@ -1,0 +1,44 @@
+<div class="main rooms-new">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>施設の新規追加</h2>
+    </div>
+    <div class="form rooms-form">
+      <div class="form-heading">
+        <%= render 'layouts/error_messages', object: @room %>
+      </div>
+      <div class="form-body">
+        <%= form_with model: @room do |room| %>
+          <table>
+            <tr>
+              <th><%= room.label :name, "施設名" %></th>
+              <td><%= room.text_field :name, placeholder: "施設名を入力" %></td>
+            </tr>
+            <tr>
+              <th><%= room.label :detail, "施設詳細" %></th>
+              <td><%= room.text_area :detail, placeholder: "施設詳細を入力" %></td>
+            </tr>
+            <tr>
+              <th><%= room.label :charge, "料金" %></th>
+              <td><%= room.number_field :charge, placeholder: "宿泊料金/日を入力" %></td>
+            </tr>
+            <tr>
+              <th><%= room.label :address, "住所" %></th>
+              <td><%= room.text_area :address, placeholder: "住所を入力" %></td>
+            </tr>
+            <tr>
+              <th><%= room.label :image, "施設画像" %></th>
+              <td><%= room.file_field :image %></td>
+            </tr>
+          </table>
+          <div class="form-btns">
+              <%= link_to "キャンセル", rooms_path, class:"btn cancel" %>
+            <p>
+              <%= room.submit "登録", class:"btn commit" %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
