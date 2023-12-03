@@ -1,0 +1,35 @@
+<div class="main users-new">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>ログイン</h2>
+    </div>
+    <div class="form users-form">
+      <div class="form-heading">
+        <% if @error_message %>
+          <div class="form-error">
+            <%= @error_message %>
+          </div>
+        <% end %>
+      </div>
+      <div class="form-body">
+        <%= form_with model: @user, url: login_path, method: :post do |user| %>
+          <table>
+            <tr>
+              <th><%= user.label :email, "メールアドレス" %></th>
+              <td><%= user.email_field :email, placeholder: "メールアドレスを入力" %></td>
+            </tr>
+            <tr>
+              <th><%= user.label :password, "パスワード" %></th>
+              <td><%= user.password_field :password, placeholder: "パスワードを入力" %></td>
+            </tr>
+          </table>
+          <div class="form-btns">
+            <p>
+              <%= user.submit "ログイン", class:"btn login" %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

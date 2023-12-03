@@ -2,10 +2,18 @@ ja:
   activerecord:
     models:
       room: 施設
+      user: ユーザー
     attributes:
       room:
         name: 施設名
         image: 施設画像
-        address: 住所
-        detail: 施設詳細
         charge: 料金
+        detail: 施設詳細
+        address: 住所
+      user:
+        name: 名前
+        email: メールアドレス
+        image: 画像
+        password: パスワード
+        profile: 自己紹介
+        

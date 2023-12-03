@@ -1,0 +1,32 @@
+<div class="main users-edit">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>アカウント情報の編集</h2>
+    </div>
+    <div class="form users-form">
+      <div class="form-heading">
+        <%= render 'layouts/error_messages', object: @user %>
+      </div>
+      <div class="form-body">
+        <%= form_with model: @user, url: users_update_account_path(@user), method: :patch do |user| %>
+          <table>
+            <tr>
+              <th><%= user.label :email,"メールアドレス" %></th>
+              <td><%= user.email_field :email, placeholder: "メールアドレスを入力" %></td>
+            </tr>
+            <tr>
+              <th><%= user.label :email,"変更後パスワード" %></th>
+              <td><%= user.password_field :password, placeholder: "変更後パスワードを入力" %></td>
+            </tr>
+          </table>
+          <div class="form-btns">
+            <%= link_to "キャンセル", user_path(@user), class: "btn cancel" %>
+            <p>
+              <%= user.submit "保存", class:"btn commit" %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
