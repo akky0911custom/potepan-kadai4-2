@@ -18,6 +18,10 @@
               <th><%= user.label :email,"変更後パスワード" %></th>
               <td><%= user.password_field :password, placeholder: "変更後パスワードを入力" %></td>
             </tr>
+            <tr>
+              <th><%= user.label :password_confirmation,"確認用パスワード" %></th>
+              <td><%= user.password_field :password_confirmation, placeholder: "確認用パスワードを入力" %></td>
+            </tr>
           </table>
           <div class="form-btns">
             <%= link_to "キャンセル", user_path(@user), class: "btn cancel" %>

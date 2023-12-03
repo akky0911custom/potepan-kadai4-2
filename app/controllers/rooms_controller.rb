@@ -1,4 +1,5 @@
 class RoomsController < ApplicationController
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   def top
     @q = Room.ransack(params[:q])
@@ -43,6 +44,13 @@ class RoomsController < ApplicationController
     end
   end
 
+  def ensure_correct_user
+    if @current_user.id != params[:id].to_i
+      flash[:notice] = "権限がありません"
+      redirect_to :rooms
+    end
+  end
+
   def destroy
     @room = Room.find(params[:id])
     @room.destroy
@@ -56,6 +64,6 @@ class RoomsController < ApplicationController
 
 private
   def room_params
-    params.require(:room).permit(:name,:image,:detail,:address,:charge).merge(image: "default_user.jpg")
+    params.require(:room).permit(:name,:image,:detail,:address,:charge,:user_id).merge(image: "default_room.jpg")
   end
 end

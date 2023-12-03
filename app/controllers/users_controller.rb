@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
   def login
     @user = User.find_by(email: params[:email])
-    if @user
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "ログインしました"
       redirect_to :root
@@ -85,11 +85,11 @@ class UsersController < ApplicationController
 
 private
   def user_create_params
-    params.require(:user).permit(:name,:email,:image,:password).merge(image: "default_user.jpg")
+    params.require(:user).permit(:name,:email,:image,:password,:password_confirmation).merge(image: "default_user.jpg")
   end
 
   def user_account_params
-    params.require(:user).permit(:email,:password)
+    params.require(:user).permit(:email,:password,:password_confirmation)
   end
 
   def user_profile_params

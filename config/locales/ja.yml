@@ -7,13 +7,14 @@ ja:
       room:
         name: 施設名
         image: 施設画像
-        charge: 料金
         detail: 施設詳細
         address: 住所
+        charge: 料金
       user:
         name: 名前
         email: メールアドレス
         image: 画像
         password: パスワード
+        password_confirmation: 確認用パスワード
         profile: 自己紹介
         
