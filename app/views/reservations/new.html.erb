@@ -1,0 +1,37 @@
+<div class="main reservations-new">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2><%= "#{@room.name}の新規予約" %></h2>
+    </div>
+    <div class="form reservations-form">
+      <div class="form-heading">
+        <%= render 'layouts/error_messages', object: @reservation %>
+      </div>
+      <div class="form-body">
+        <%= form_with model: @reservation, url: rooms_reservation_create_path(@room) do |reservation| %>
+          <%= reservation.hidden_field :room_id, value: @room.id %>
+          <table>
+            <tr>
+              <th><%= reservation.label :check_in_date, "チェックイン" %></th>
+              <td><%= reservation.date_field :check_in_date %></td>
+            </tr>
+            <tr>
+              <th><%= reservation.label :check_out_date, "チェックアウト" %></th>
+              <td><%= reservation.date_field :check_out_date %></td>
+            </tr>
+            <tr>
+              <th><%= reservation.label :number_of_people, "人数" %></th>
+              <td><%= reservation.number_field :number_of_people, placeholder: "人数を入力" %></td>
+            </tr>
+          </table>
+          <div class="form-btns">
+              <%= link_to "キャンセル", rooms_search_path, class:"btn cancel" %>
+              <p>
+                <%= reservation.submit "登録", class:"btn commit" %>
+              </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

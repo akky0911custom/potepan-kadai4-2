@@ -8,9 +8,10 @@
         <thead>
           <tr>
             <th>画像</th>
-            <th>施設名・詳細</th>
+            <th>施設名</th>
             <th>紹介文</th>
             <th>料金</th>
+            <th>詳細</th>
             <th>予約</th>
           </tr>
         </thead>
@@ -18,10 +19,11 @@
           <% @rooms.each do |room| %>
             <tr>
               <td><%= image_tag room.image.url %></td>
-              <td><%= link_to room.name, room_path(room) %></td>
+              <td><%= room.name %></td>
               <td><%= room.detail %></td>
               <td><%= room.charge.to_s(:delimited) %></td>
-              <td>予約</td>
+              <td><%= link_to "詳細", room_path(room) %></td>
+              <td><%= link_to "予約", rooms_reservation_new_path(room) %></td>
             </tr>
           <% end %>
         </tbody>

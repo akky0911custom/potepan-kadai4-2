@@ -7,7 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
@@ -27,7 +27,7 @@
                 <%= link_to "施設の新規登録", new_room_path %>
               </li>
               <li class="header-menus-user-subitem">
-                予約済み一覧
+                <%= link_to "予約済み一覧", users_reservations_path(@current_user.id) %>
               </li>
               <li class="header-menus-user-subitem">
                 <%= link_to "登録施設一覧", rooms_path %>

@@ -6,5 +6,6 @@ class Room < ApplicationRecord
   validates :charge, {presence: true, numericality: {greater_than_or_equal_to: 1}}
   validates :user_id, presence: true
   belongs_to :user
+  has_many :reservations, dependent: :destroy
 
 end

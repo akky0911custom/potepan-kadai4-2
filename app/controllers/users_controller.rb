@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
+  before_action :authenticate_user, {only: [:show, :edit_profile, :update_account, :update_profile]}
   before_action :forbid_login_user, {only: [:new, :create, :login_form, :login]}
-  before_action :ensure_correct_user, {only: [:edit, :update]}
+  before_action :ensure_correct_user, {only: [:edit_account, :edit_profile, :update_account, :update_profile]}
 
   def show
     @user = User.find(params[:id])
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    if @current_user.id != params[:user_id].to_i
+    if @current_user.id != params[:id].to_i
       flash[:notice] = "権限がありません"
       redirect_to :root
     end

@@ -3,6 +3,7 @@ ja:
     models:
       room: 施設
       user: ユーザー
+      reservation: 予約
     attributes:
       room:
         name: 施設名
@@ -18,4 +19,10 @@ ja:
         password: パスワード
         password_confirmation: 確認用パスワード
         profile: 自己紹介
+      reservation:
+        room_id: 施設番号
+        check_in_date: チェックイン日
+        check_out_date: チェックアウト日
+        number_of_people: 人数
+        user_id: ユーザー番号
         
