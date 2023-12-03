@@ -3,5 +3,6 @@ class User < ApplicationRecord
   validates :email, {presence: true, uniqueness: true}
   mount_uploader :image, UserImageUploader
   has_secure_password
+  has_many :rooms, dependent: :destroy
 
 end

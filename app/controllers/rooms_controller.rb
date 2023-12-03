@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
   end
 
   def index
-    @rooms = Room.all
+    @rooms = @current_user.rooms.all
   end
 
   def new
@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.create(room_params)
+    @room = @current_user.rooms.create(room_params)
     if @room.save
       flash[:notice] = "施設を登録しました"
       redirect_to :rooms

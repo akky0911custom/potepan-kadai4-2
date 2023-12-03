@@ -4,5 +4,7 @@ class Room < ApplicationRecord
   validates :address, presence: true
   validates :detail, presence: true
   validates :charge, {presence: true, numericality: {greater_than_or_equal_to: 1}}
+  validates :user_id, presence: true
+  belongs_to :user
 
 end
