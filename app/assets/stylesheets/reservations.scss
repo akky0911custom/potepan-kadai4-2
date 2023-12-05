@@ -4,3 +4,14 @@
   overflow: hidden;
   box-shadow: 0 2px 6px #c1ced7;
 }
+
+.reservations-btns-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+  margin-left: 5px;
+}
+
+.reservations-btns-wrapper a,.reservations-btns-wrapper p {
+  margin-left: 5px;
+}

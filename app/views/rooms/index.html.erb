@@ -19,7 +19,13 @@
         <tbody>
           <% @rooms.each do |room| %>
             <tr>
-              <td><%= image_tag room.image.url %></td>
+              <td>
+                <% if room.image? %>
+                  <%= image_tag room.image.url %>
+                <% else %>
+                  <%= image_tag '/assets/default_room.jpg' %>
+                <% end %>
+              </td>
               <td><%= link_to room.name, room_path(room) %></td>
               <td><%= room.detail %></td>
               <td><%= room.charge.to_s(:delimited) %></td>

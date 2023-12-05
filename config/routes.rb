@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   resources :rooms
   get 'rooms/:id/reservation/new',to: 'reservations#new', as: 'rooms_reservation_new'
+  post 'rooms/:id/reservation/new/confirm', to: 'reservations#new_confirm', as: 'rooms_reservation_new_confirm'
   post 'rooms/:id/reservation/create', to: 'reservations#create', as: 'rooms_reservation_create'
 
   resources :users
@@ -15,6 +16,7 @@ Rails.application.routes.draw do
   get 'users/:id/reservations',to: 'reservations#index', as: 'users_reservations'
   get 'users/:user_id/reservations/:id', to: 'reservations#show', as: 'users_reservation_show'
   get 'users/:user_id/reservations/:id/edit', to: 'reservations#edit', as: 'users_reservation_edit'
+  patch 'users/:user_id/reservations/:id/edit/confirm', to: 'reservations#edit_confirm', as: 'users_reservation_edit_confirm'
   patch 'users/:user_id/reservations/:id/update', to: 'reservations#update', as: 'users_reservation_update'
   delete 'users/:user_id/reservations/:id', to: 'reservations#destroy', as: 'users_reservation_destroy'
 

@@ -7,6 +7,7 @@ class ReservationsController < ApplicationController
   end
 
   def new
+    session.delete(:reservation)
     @room = Room.find(params[:id])
     @reservation = Reservation.new
   end
@@ -15,32 +16,46 @@ class ReservationsController < ApplicationController
     @reservation = @current_user.reservations.find(params[:id])
   end
 
-  def create
+  def new_confirm
     @room = Room.find(params[:reservation][:room_id])
     @reservation = @room.reservations.create(reservation_param)
     @reservation.user = @current_user
-    if @reservation.save
-      flash[:notice] = "予約完了しました"
-      redirect_to :users_reservations
-    else
-      flash[:notice] = "予約に失敗しました"
+    session[:reservation] = @reservation
+    if @reservation.invalid?
+      flash[:notice] = "入力内容にエラーがあります"
       render "new"
     end
   end
+  
+  def create
+    Reservation.create!(session[:reservation])
+    session.delete(:reservation)
+    flash[:notice] = "予約完了しました"
+    redirect_to :users_reservations
+	end
 
   def edit
+    session.delete(:reservation)
     @reservation = @current_user.reservations.find(params[:id])
   end
 
-  def update
-    @reservation = Reservation.find(params[:id])
-    if @reservation.update(reservation_param)
-      flash[:notice] = "予約編集完了しました"
-      redirect_to :users_reservations
-    else
-      flash[:notice] = "予約編集失敗しました"
+  def edit_confirm
+    @reservation = @current_user.reservations.find(params[:id])
+    updated_attributes = @reservation.attributes.merge(reservation_param.to_h)
+    @reservation = Reservation.new(updated_attributes)
+    session[:reservation] = @reservation
+    if @reservation.invalid?
+      flash[:notice] = "入力内容にエラーがあります"
       render "edit"
     end
+  end
+
+  def update
+    @reservation = @current_user.reservations.find(params[:id])
+    @reservation.update!(session[:reservation])
+    session.delete(:reservation)
+    flash[:notice] = "予約編集完了しました"
+    redirect_to users_reservations_path
   end
 
   def destroy
@@ -50,8 +65,9 @@ class ReservationsController < ApplicationController
   end
 
   def ensure_correct_user
-    if @current_user.id != params[:id].to_i
-      flash[:notice] = "権限がありません"
+    @reservation = Reservation.find(params[:id])
+    if @reservation.user_id != @current_user.id
+      flash[:notice] = "`権限がありません"
       redirect_to :root
     end
   end

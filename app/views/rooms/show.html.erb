@@ -13,7 +13,13 @@
       <table>
         <tr>
           <th>施設画像</th>
-          <td><%= image_tag @room.image.url %></td>
+          <td>
+            <% if @room.image? %>
+              <%= image_tag @room.image.url %>
+            <% else %>
+              <%= image_tag '/assets/default_room.jpg' %>
+            <% end %>
+          </td>
         </tr>
         <tr>
           <th>紹介文</th>

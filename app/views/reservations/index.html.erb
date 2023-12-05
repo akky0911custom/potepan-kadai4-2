@@ -22,7 +22,13 @@
         <tbody>
           <% @reservations.each do |reservation| %>
             <tr>
-              <td><%= image_tag reservation.room.image.url %></td>
+              <td>
+                <% if reservation.room.image? %>
+                  <%= image_tag reservation.room.image.url %>
+                <% else %>
+                  <%= image_tag '/assets/default_room.jpg' %>
+                <% end %>
+              </td>
               <td><%= reservation.room.name %></td>
               <td><%= reservation.room.detail %></td>
               <td><%= reservation.room.charge * reservation.number_of_people * (reservation.check_out_date + 1.day - reservation.check_in_date ).to_i %></td>

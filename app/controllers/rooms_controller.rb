@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user, {only: [:index, :new, :cretate, :edit, :update]}
+  before_action :authenticate_user, {except: [:top, :show, :search]}
   before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
 
   def top
@@ -46,7 +46,8 @@ class RoomsController < ApplicationController
   end
 
   def ensure_correct_user
-    if @current_user.id != params[:user_id].to_i
+    @room = Room.find(params[:id])
+    if @room.user_id != @current_user.id
       flash[:notice] = "権限がありません"
       redirect_to :root
     end
@@ -65,6 +66,6 @@ class RoomsController < ApplicationController
 
 private
   def room_params
-    params.require(:room).permit(:name,:image,:detail,:address,:charge,:user_id).merge(image: "default_room.jpg")
+    params.require(:room).permit(:name,:image,:detail,:address,:charge,:user_id)
   end
 end
