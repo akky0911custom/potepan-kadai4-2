@@ -1,0 +1,35 @@
+<div class="main reservations-show">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>予約詳細</h2>
+      <div class="top-wrapper-btns">
+        <%= link_to "←戻る", :back, class:"btn back"%>
+        <%= link_to "編集", users_reservation_edit_path(user_id: @current_user.id, id: @reservation.id), class:"btn edit" %>
+      </div>
+    </div>
+    <div class="reservations-show-item">
+      <table>
+        <tr>
+          <th>チェックイン日</th>
+          <td><%= @reservation.check_in_date.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <th>チェックアウト日</th>
+          <td><%= @reservation.check_out_date.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <th>宿泊日数</th>
+          <td><%= (@reservation.check_out_date + 1.day - @reservation.check_in_date ).to_i %></td>
+        </tr>
+        <tr>
+          <th>人数</th>
+          <td><%= @reservation.number_of_people %></td>
+        </tr>
+        <tr>
+          <th>支払い金額</th>
+          <td><%= @reservation.room.charge * @reservation.number_of_people * (@reservation.check_out_date + 1.day - @reservation.check_in_date ).to_i %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

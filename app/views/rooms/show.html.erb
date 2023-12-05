@@ -1,0 +1,35 @@
+<div class="main rooms-show">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>
+        <%= @room.name %>
+      </h2>
+      <div class="top-wrapper-btns">
+        <%= link_to "←戻る", :back, class:"btn back" %>
+        <%= link_to "編集", edit_room_path(@room.id), class:"btn edit" %>
+      </div>
+    </div>
+    <div class="rooms-show-item">
+      <table>
+        <tr>
+          <th>施設画像</th>
+          <td>
+            <% if @room.image? %>
+              <%= image_tag @room.image.url %>
+            <% else %>
+              <%= image_tag '/assets/default_room.jpg' %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>紹介文</th>
+          <td><%= @room.detail %></td>
+        </tr>
+        <tr>
+          <th>料金</th>
+          <td><%= @room.charge.to_s(:delimited) %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

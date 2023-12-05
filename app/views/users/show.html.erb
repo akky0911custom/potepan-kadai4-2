@@ -1,0 +1,34 @@
+<div class="main user-show">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>アカウント詳細</h2>
+    </div>
+    <div class="users-show-item">
+      <table>
+        <tr>
+          <th>アイコン</th>
+          <td><%= image_tag @user.image.url %></td>
+        </tr>
+        <tr>
+          <th>名前</th>
+          <td><%= @user.name %></td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td><%= @user.email %></td>
+        </tr>
+        <tr>
+          <th>パスワード</th>
+          <td>*********</td>
+      </tr>
+      </table>
+    </div>
+    <div class="btns-wrapper">
+      <% if @user.id == @current_user.id %>
+        <%= link_to "←戻る", :back, class:"btn back"%>
+        <%= link_to "アカウント編集", "/users/#{@user.id}/edit-account", class:"btn edit" %>
+        <%= link_to "プロフィール編集", "/users/#{@user.id}/edit-profile", class:"btn edit" %>
+      <% end %>
+    </div>
+  </div>
+</div>

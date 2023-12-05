@@ -1,0 +1,36 @@
+<div class="main reservations-new">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>予約編集</h2>
+    </div>
+    <div class="form reservations-form">
+      <div class="form-heading">
+        <%= render 'layouts/error_messages', object: @reservation %>
+      </div>
+      <div class="form-body">
+        <%= form_with model: @reservation, url: users_reservation_edit_confirm_path(user_id: @current_user.id, id: @reservation.id), method: :patch do |reservation| %>
+          <table>
+            <tr>
+              <th><%= reservation.label :check_in_date, "チェックイン" %></th>
+              <td><%= reservation.date_field :check_in_date %></td>
+            </tr>
+            <tr>
+              <th><%= reservation.label :check_out_date, "チェックアウト" %></th>
+              <td><%= reservation.date_field :check_out_date %></td>
+            </tr>
+            <tr>
+              <th><%= reservation.label :number_of_people, "人数" %></th>
+              <td><%= reservation.number_field :number_of_people, placeholder: "人数を入力" %></td>
+            </tr>
+          </table>
+          <div class="form-btns">
+              <%= link_to "キャンセル", users_reservations_path(@current_user), class:"btn cancel" %>
+            <p>
+              <%= reservation.submit "確認", class:"btn commit" %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

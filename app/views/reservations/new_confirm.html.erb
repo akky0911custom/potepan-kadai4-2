@@ -1,0 +1,40 @@
+<div class="main reservations-confirm">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>新規予約確認</h2>
+      <h4>以下の内容で予約します</h4>
+    </div>
+    <div class="reservations-show-item">
+      <table>
+        <tr>
+          <th>チェックイン日</th>
+          <td><%= @reservation.check_in_date.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <th>チェックアウト日</th>
+          <td><%= @reservation.check_out_date.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <th>宿泊日数</th>
+          <td><%= (@reservation.check_out_date + 1.day - @reservation.check_in_date ).to_i %></td>
+        </tr>
+        <tr>
+          <th>人数</th>
+          <td><%= @reservation.number_of_people %></td>
+        </tr>
+        <tr>
+          <th>支払い金額</th>
+          <td><%= @reservation.room.charge * @reservation.number_of_people * (@reservation.check_out_date + 1.day - @reservation.check_in_date ).to_i %></td>
+        </tr>
+      </table>
+    </div>
+    <div class="reservations-btns-wrapper">
+      <%= link_to "キャンセル", rooms_reservation_new_path(@room), class: "btn cancel" %>
+      <%= form_with model: @reservation, url: rooms_reservation_create_path(@room), method: :post do |reservation| %>
+        <p>
+          <%= reservation.submit "確定", class: 'btn commit' %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>

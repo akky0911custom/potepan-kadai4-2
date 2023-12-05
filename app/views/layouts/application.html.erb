@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PotepanKadai42</title>
+    <title>potepan-kadai4-2</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,55 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <div class="header-logo">
+        <%= link_to("宿泊予約サイト", "/") %>
+      </div>
+      <ul class="header-menus">
+        <% if @current_user %>
+          <li>
+            <%= image_tag @current_user.image.url %>
+          </li>
+          <li class="header-menus-user">
+            <%= @current_user.name %>
+            <ul class="header-menus-user-sub">
+              <li class="header-menus-user-subitem">
+                <%= link_to "施設の新規登録", new_room_path %>
+              </li>
+              <li class="header-menus-user-subitem">
+                <%= link_to "予約済み一覧", users_reservations_path(@current_user.id) %>
+              </li>
+              <li class="header-menus-user-subitem">
+                <%= link_to "登録施設一覧", rooms_path %>
+              </li>
+              <li class="header-menus-user-subitem">
+                <%= link_to "アカウント編集", users_edit_account_path(@current_user.id) %>
+              </li>
+              <li class="header-menus-user-subitem">
+                <%= link_to "プロフィール編集",  users_edit_profile_path(@current_user.id) %>
+              </li>
+              <li class="logout">
+                <%= link_to("ログアウト", "/logout", {method: "post"}) %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to("新規登録", "/signup") %>
+          </li>
+          <li>
+            <%= link_to("ログイン", "/login") %>
+          </li>
+        <% end %>
+      </ul>
+    </header>
+
+  <% if flash[:notice] %>
+    <div class="flash">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <%= yield %>
   </body>
 </html>

@@ -1,0 +1,39 @@
+<div class="main users-new">
+  <div class="container">
+    <div class="top-wrapper">
+      <h2>新規ユーザー登録</h2>
+    </div>
+    <div class="form users-form">
+      <div class="form-heading">
+        <%= render 'layouts/error_messages', object: @user %>
+      </div>
+      <div class="form-body">
+        <%= form_with model: @user do |user| %>
+          <table>
+            <tr>
+              <th><%= user.label :name, "ユーザー名" %></th>
+              <td><%= user.text_field :name, placeholder: "ユーザー名を入力" %></td>
+            </tr>
+            <tr>
+              <th><%= user.label :email, "メールアドレス" %></th>
+              <td><%= user.email_field :email, placeholder: "メールアドレスを入力" %></td>
+            </tr>
+            <tr>
+              <th><%= user.label :name, "パスワード" %></th>
+              <td><%= user.password_field :password, placeholder: "パスワードを入力" %></td>
+            </tr>
+            <tr>
+              <th><%= user.label :password_confirmation, "確認用パスワード" %></th>
+              <td><%= user.password_field :password_confirmation, placeholder: "確認用パスワードを入力" %></td>
+            </tr>
+          </table>
+          <div class="form-btns">
+            <p>
+              <%= user.submit "新規登録", class:"btn commit" %>
+            </p>
+          </div>
+        <% end %>
+      </div>
+    <div>
+  </div>
+</div>
